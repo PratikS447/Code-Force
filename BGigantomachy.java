@@ -1,0 +1,7 @@
+/**
+ * BGigantomachy
+ */
+public class BGigantomachy {
+
+    
+}
