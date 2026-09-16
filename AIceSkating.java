@@ -1,0 +1,6 @@
+/**
+ * AIceSkating
+ */
+public class AIceSkating {
+    
+}
