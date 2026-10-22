@@ -23,40 +23,43 @@ public class BMaximumSum {
         sc.close();
     }
 
-    public static long findMaximumSum(long[] arr, int k){
+    public static long findMaximumSum(long arr[], int k){
         Arrays.sort(arr);
-        long prefix[] = builderPrefixSum(arr);
-        return computeMaxRemainingSum(arr, prefix, k);
+        long prefix[] = build_Perfix(arr);
+        return computeMaxRem(arr, prefix, k);
     }
 
-    private static long[] builderPrefixSum(long[] arr){
+    public static long[] build_Perfix(long arr[]){
         int n = arr.length;
-        long[] prefix = new long[n+1];
+        long prefix[] = new long[n+1];
         for(int i = 0; i < n; i++){
-            prefix[i+1] = prefix[i]+arr[i];
+            prefix[i+1] = prefix[i] +arr[i];
         }
         return prefix;
     }
 
-    private static long computeMaxRemainingSum(long arr[], long[] prefix, int k){
+    public static long computeMaxRem(long arr[], long prefix[], int k){
         int n = arr.length;
-        long totalSum = prefix[n];
-        long answer = 0;
+        long total_sum = prefix[n];
+        long ans = 0;
 
         for(int x = 0; x <= k; x++){
-            int numberOfSmallest = 2*x;
-            int numberOfLargest = k - x;
+            int numOfSmallest = 2*x;
+            int numOfLargest = k -x;
 
-            if (numberOfSmallest > n) break;
-            if (numberOfSmallest + numberOfLargest > n) continue;
+            if (numOfSmallest > n) {
+                break;
+            }
+            if (numOfSmallest + numOfLargest > n) {
+                continue;
+            }
 
-            long smallestSum = prefix[numberOfSmallest];
-            long largestSum = prefix[n] -prefix[n -numberOfLargest];
-            long remainingSum = totalSum -smallestSum -largestSum;
+            long smallest_sum = prefix[numOfSmallest];
+            long larget_sum = prefix[n] -prefix[n -numOfLargest];
+            long rem = total_sum -smallest_sum -larget_sum;
 
-            answer = Math.max(answer, remainingSum);
+            ans = Math.max(ans, rem);
         }
-
-        return answer;
+        return ans;
     }
 }
